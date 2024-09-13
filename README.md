@@ -6,9 +6,23 @@ You need the [Just](https://just.systems/) command line runner.
 
 Build Honggfuzz base and Yosys images: `just build`
 
-Run: `just run`
+Create the container: `just create`
 
-Extract crashes: TODO
+Get a shell into the container: `just run`
+
+Once in the container, start fuzzing by running `./fuzz.sh`
+
+(NOTE this is super hacky, especially the shell in the container part, and will be fixed in future).
+
+## TODO
+- Improve workflow, make it easier to automatically run and export crashes from the container
+    - Shell is currently required because honggfuzz doesn't seem to print properly when running outside a
+    shell
+- Make scripts less ugly
+- Try using AFL++ and LibFuzzer
+- Persistent fuzzing by mounting `/corpus`, `/out` and `/crashes` as a volume
+- Minimise corpus using `honggfuzz --minimize` first
+- Limit container disk usage (storage quota)
 
 ## Licence
 - The corpus directory is derived from Yosys' testing suite which is under the ISC licence

@@ -52,7 +52,10 @@ COPY corpus /corpus
 RUN mkdir -p /out
 RUN mkdir -p /crash
 
+RUN bash -c 'echo -e "#!/bin/bash\n/usr/local/bin/honggfuzz -i /corpus -t 5 --crashdir /crash -- /usr/local/bin/yosys -s ___FILE___" > /yosys/fuzz.sh'
+RUN chmod +x /yosys/fuzz.sh
+
 # run honggfuzz
-ENTRYPOINT ["/usr/local/bin/honggfuzz"]
-# honggfuzz -i fuzz -t 5 -- ./yosys -s ___FILE___
-CMD ["-i", "/corpus", "-t", "5", "--crashdir", "/crash", "--quiet", "--minimize", "--", "/usr/local/bin/yosys", "-s", "___FILE___"]
+# ENTRYPOINT ["/usr/local/bin/honggfuzz"]
+# # honggfuzz -i fuzz -t 5 -- ./yosys -s ___FILE___
+# CMD ["-i", "/corpus", "-t", "5", "--crashdir", "/crash", "--", "/usr/local/bin/yosys", "-s", "___FILE___"]
