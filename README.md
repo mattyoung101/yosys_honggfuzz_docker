@@ -1,14 +1,14 @@
 # yosys-honggfuzz-docker
-The plan is to run Yosys in a Docker container and fuzz it using Honggfuzz.
+Scripts to run Yosys in a Docker container and fuzz it using [Honggfuzz](https://github.com/google/honggfuzz).
 
 ## Building
-You need the Just command line runner.
+You need the [Just](https://just.systems/) command line runner.
 
-Build the Honggfuzz image: `just honggfuzz`
+Build Honggfuzz base and Yosys images: `just build`
 
-Next, build the Yosys image: `just yosys`
+Run: `just run`
 
-Run: TODO
+Extract crashes: TODO
 
 ## Licence
 - The corpus directory is derived from Yosys' testing suite which is under the ISC licence

@@ -50,8 +50,9 @@ RUN make config-clang \
 # copy corpus
 COPY corpus /corpus
 RUN mkdir -p /out
+RUN mkdir -p /crash
 
 # run honggfuzz
 ENTRYPOINT ["/usr/local/bin/honggfuzz"]
 # honggfuzz -i fuzz -t 5 -- ./yosys -s ___FILE___
-CMD ["-i", "/corpus", "-o", "/out", "-t", "5", "--", "/usr/local/bin/yosys", "-s", "___FILE___"]
+CMD ["-i", "/corpus", "-t", "5", "--crashdir", "/crash", "--quiet", "--minimize", "--", "/usr/local/bin/yosys", "-s", "___FILE___"]
